@@ -21,7 +21,8 @@ public class LinerInter : MonoBehaviour
 
     private void Update()
     {
-        if (t < 1.0f) ;
+        //보간이 끝나지 않았을 때만 이동을 진행하겠습니다.
+        if (t < 1.0f) 
         {
             t += Time.deltaTime * speed;
             transform.position = Vector3.Lerp
