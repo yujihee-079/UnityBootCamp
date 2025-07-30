@@ -1,0 +1,780 @@
+## 7일차
+
+ctrl + k + c 전체 주석
+ctrl + k + u 전체 주석 해제 
+
+##290p~293p 예습
+
+namespace MyApp
+{
+    internal class Program
+    {
+        static int Add(int a, int b)
+        {
+            return a + b;
+        }
+
+        //a값만 받아서 +5 뱉어주는 함수를 만들어야 한다.
+
+        static int Add(int a) // (int a, int b, int c)등 매개 변수가 여러개여도 상관없다.
+        {
+            return a + 5;
+        }
+
+//[add(1,2) add(1)] --> x
+//[add(1),(2)] , [add(1)] --> 0
+
+        static void Main(string[] args)
+        {
+            //오버로딩 
+            //오버로딩 = 다중 정의 
+            //하나의 이름을 다중으로 정의한다.
+            //오버로딩 = "함수 이름 재사용"
+            int a = 1;
+            int b = 2;
+
+            int result = Add(a, b);
+            int result2 = Add(a);
+            Console.WriteLine(result);
+        }
+    }
+}
+
+======
+선택적 매개변수 
+
+위 코드에서  static int Add(int a, int b, int c=4)
+ {
+     return a + b+ c;
+ }
+
+and 
+
+int result = Add(a, b); // c를 안 적어도 이미 값이 설정 되있기 때문에 안 적어도 add(a,b,c,)가 계산된다.
+
+@@ 만약 main 함수에서 int c값을 3으로 지정하면 호출받아서 Add로 갔을 대 int c = 3으로 대입된다. 즉 7 /= 6
+
+@@ 선택적 매개변수로 지정한 값은 자리를 바꿔도 상관없이 진행된다./ 그냥 매개변수는 그대로 적어야 함. ex) e : c, c : 2
+// e의 값을 c로 넣으시고, c 의 값은 2로 하세요.
+
+ // 풀이
+static int SumBetween(int a,int b)
+{
+
+    for(int a=1; a < 2; a++) <=== 이렇게 하니까 이름인 'a'인 지역 또는 매개 변수는 이 범위에서 선언될수 없습니다. 라는 오류
+    {
+        for(int b=1; b <= 6; b++)
+        {
+            int result = a + b;
+            
+        }
+    }
+    return a + b;
+} 
+
+using System;
+
+namespace CSharp
+{
+    class Program
+    {
+        // 재귀함수 - 함수 안에서 자기 자신을 다시 호출하는 함수
+
+        static int SumBetween(int a, int b)
+        {
+            /*
+            SumBetween(1, 6)
+            return = 1 + SumBetween(2, 6)
+            return = 1 + 2 + SumBetween(3, 6)
+            return = 1 + 2 + 3 + SumBetween(4, 6)
+            return = 1 + 2 + 3 + 4 + SumBetween(5, 6)
+            return = 1 + 2 + 3 + 4 + 5 + SumBetween(6, 6)
+            return = 1 + 2 + 3 + 4 + 5 + 6 + SumBetween(7, 6)
+            return = 1 + 2 + 3 + 4 + 5 + 6 + 0 (종료)
+            → 결과: 21
+            /
+
+            /
+            return = 1 + SumBetween(2, 6)
+            return =     (       2      ) + SumBetween(3, 6)
+            return =                        (       3      ) + SumBetween(4, 6)
+            return =                                           (       4      ) + SumBetween(5, 6)
+            return =                                                              (       5      ) + SumBetween(6, 6)
+            return =                                                                                 (       6      ) + SumBetween(7, 6)
+                                                                                                                        (       0      )
+            */
+
+            if (a > b)
+                return 0;
+
+            return a + SumBetween(a + 1, b);
+        }
+
+        static void Main(string[] args)
+        {
+            // 1 + 2 + 3 + 4 + 5 + 6 = 21
+            int result = SumBetween(1, 6);
+            Console.WriteLine($"결과: {result}");
+        }
+
+
+    }
+}
+
+
+=====================================================
+1. 직업을 선택하세요 문구를 뜨게하기 ㅇ
+
+2. 다시 직업을 선택하기 ㅇ 반만 진행이 됨.
+
+    static void Job()
+    {
+        Console.WriteLine("직업을 선택하세요!");
+        Console.WriteLine("[1]");
+        Console.WriteLine("[2]");
+        Console.WriteLine("[3]");
+        string result = Console.ReadLine();
+    }
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("직업을 선택하세요!");
+        Console.WriteLine("[1]");
+        Console.WriteLine("[2]");
+        Console.WriteLine("[3]");
+
+        string result =Console.ReadLine();
+
+        switch (result)
+        {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            default:
+                Job();
+                break;
+                    }
+        }
+}
+
+3. switch 반복하기 / 반복문을 반복하고 싶다. 참과 거짓? 1) 함수를 따로 빼놔서 while문을 써서 반복시켰다.
+
+계속 숫자를 써서 반복할 수 있게 했다.
+
+
+hp는 int 로 설정 가능한데. 설정된 인트들이 전사, 마법사, 도둑에게 다 대응되어야 한다.
+
+choice가 클래스타입으로 대응되니까 1 = 100 으로 설정?
+
+/// 두번째는 함수 하나 만들고, 아웃 형식으로 코드를 짰다. 
+
+Random rand = new Random();
+int a = rand.Next(1, 4); //<== 1~ 3 랜덤한 숫자 생성 
+==================================================================
+**(1)
+
+namespace Program
+{
+    class Program
+    {
+        enum ClassType
+        {
+            None,
+            Knight,
+            Mage,
+            Rogue
+        }
+
+        static ClassType ClassChoice()
+        {
+            Console.WriteLine("직업을 선택하세요!");
+            Console.WriteLine("[1] 기사");
+            Console.WriteLine("[2] 마법사");
+            Console.WriteLine("[3] 도둑");
+
+            ClassType choice = ClassType.None;
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    choice = ClassType.Knight;
+                    break;
+                case "2":
+                    choice = ClassType.Mage;
+                    break;
+                case "3":
+                    choice = ClassType.Rogue;
+                    break;
+            }
+
+            return choice;
+        }
+
+        static void Main(string[] args)
+        {
+            ClassType choice = ClassType.None;
+
+            while (true)
+            {
+                choice = ClassChoice();
+                if (choice != ClassType.None)
+                    break;
+            }
+        }
+    }
+}
+
+====================================================================
+(2)
+namespace CSharp
+{
+    class Program
+    {
+        enum ClassType
+        {
+            None = 0,
+            Knight,
+            Mage,
+            Rogue
+        }
+
+        struct Player
+        {
+            public int hp;
+            public int atk;
+        } 
+
+        static ClassType ClassChoice()
+        {
+            Console.WriteLine("직업을 선택하세요!");
+            Console.WriteLine("[1] 기사");
+            Console.WriteLine("[2] 마법사");
+            Console.WriteLine("[3] 도둑");
+
+            ClassType choice = ClassType.None;
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    choice = ClassType.Knight;
+                    break;
+                case "2":
+                    choice = ClassType.Mage;
+                    break;
+                case "3":
+                    choice = ClassType.Rogue;
+                    break;
+            }
+
+            return choice;
+        }
+
+        static void CreatePlayer(ClassType choice, out Player player)
+        {
+            // 기사(100/10), 마법사(50/15), 도둑(75/12)
+            switch (choice)
+            {
+                case ClassType.Knight:
+                    player.hp = 100;
+                    player.atk = 10;
+                    break;
+                case ClassType.Mage:
+                    player.hp = 50;
+                    player.atk = 15;
+                    break;
+                case ClassType.Rogue:
+                    player.hp = 75;
+                    player.atk = 12;
+                    break;
+                default:
+                    player.hp = 0;
+                    player.atk = 0;
+                    break;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            ClassType choice = ClassType.None;
+
+            while (true)
+            {
+                choice = ClassChoice();
+                if (choice != ClassType.None)
+                {
+                    Player player;
+                    ClassType classType = ClassType.None;
+
+                    // hp 셋팅
+                    CreatePlayer(choice, out player);
+
+
+                    Console.WriteLine($"HP {player.hp}, ATK {player.atk}");
+                }
+            }
+        }
+    }
+}
+
+
+// struct 구조체
+// - 변수들을 하나의 덩어리로 묶어서 뭉쳐서 사용할때 사용함
+
+========================================================
+
+(3)
+namespace CSharp
+{
+    class Program
+    {
+        enum ClassType
+        {
+            None = 0,
+            Knight,
+            Mage,
+            Rogue
+        }
+
+        enum MonsterType
+        {
+            None = 0,
+            Slime,
+            Orc,
+            Skeleton
+        }
+
+        struct Player
+        {
+            public int hp;
+            public int atk;
+        }
+
+        struct Monster
+        {
+            public int hp;
+            public int atk;
+        }
+
+        static ClassType ClassChoice()
+        {
+            Console.WriteLine("직업을 선택하세요!");
+            Console.WriteLine("[1] 기사");
+            Console.WriteLine("[2] 마법사");
+            Console.WriteLine("[3] 도둑");
+
+            ClassType choice = ClassType.None;
+            string input = Console.ReadLine();
+
+            switch (input)
+            {
+                case "1":
+                    choice = ClassType.Knight;
+                    break;
+                case "2":
+                    choice = ClassType.Mage;
+                    break;
+                case "3":
+                    choice = ClassType.Rogue;
+                    break;
+            }
+
+            return choice;
+        }
+
+        static void CreatePlayer(ClassType choice, out Player player)
+        {
+            // 기사(100/10), 마법사(50/15), 도둑(75/12)
+            switch (choice)
+            {
+                case ClassType.Knight:
+                    player.hp = 100;
+                    player.atk = 10;
+                    break;
+                case ClassType.Mage:
+                    player.hp = 50;
+                    player.atk = 15;
+                    break;
+                case ClassType.Rogue:
+                    player.hp = 75;
+                    player.atk = 12;
+                    break;
+                default:
+                    player.hp = 0;
+                    player.atk = 0;
+                    break;
+            }
+        }
+
+        static void CreateRandomMonster(out Monster monster)
+        {
+            Random rand = new Random();
+            int randMonster = rand.Next(1, 4);
+
+            switch (randMonster)
+            {
+                case (int)MonsterType.Slime:
+                    Console.WriteLine("슬라임이 스폰되었습니다.");
+                    monster.hp = 20;
+                    monster.atk = 2;
+                    Console.WriteLine($"슬라임 HP {monster.hp} ATK {monster.atk}");
+                    break;
+                case (int)MonsterType.Orc:
+                    Console.WriteLine("오크가 스폰되었습니다.");
+                    monster.hp = 40;
+                    monster.atk = 4;
+                    Console.WriteLine($"오크 HP {monster.hp} ATK {monster.atk}");
+                    break;
+                case (int)MonsterType.Skeleton:
+                    Console.WriteLine("스켈레톤이 스폰되었습니다.");
+                    monster.hp = 30;
+                    monster.atk = 3;
+                    Console.WriteLine($"스켈레톤 HP {monster.hp} ATK {monster.atk}");
+                    break;
+                default:
+                    monster.hp = 0;
+                    monster.atk = 0;
+                    break;
+            }
+        }
+
+
+        static void EnterGame()
+        {
+            while (true)
+            {
+                Console.WriteLine("게임에 접속했습니다");
+                Console.WriteLine("[1] 사냥터로 이동");
+                Console.WriteLine("[2] 로비로 돌아가기");
+
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    EnterField();
+                }
+                else if (input == "2")
+                {
+                    break;
+                }
+            }
+        }
+
+        static void EnterField()
+        {
+            while (true)
+            {
+                Console.WriteLine("사냥터에 도착했습니다");
+
+                Monster monster;
+                CreateRandomMonster(out monster);
+
+                Console.WriteLine("[1] 전투 시작");
+                Console.WriteLine("[2] 도망치기");
+
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    //Fight();
+                }
+                else if (input == "2")
+                {
+                    continue;
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            ClassType choice = ClassType.None;
+
+            while (true)
+            {
+                choice = ClassChoice();
+                if (choice != ClassType.None)
+                {
+                    // 캐릭터 생성
+                    Player player;
+                    CreatePlayer(choice, out player);
+
+                    EnterGame();
+                }
+            }
+        }
+    }
+}
+
+==========================================================
+타인의 코드 
+(1)
+namespace MyApp
+{
+    public enum ClassType
+    {
+        Warrior,
+        Mage,
+        Thief,
+        None,
+    }
+
+    struct ClassInfo
+    {
+        public static readonly ClassInfo Warrior = new ClassInfo(100, 10, ClassType.Warrior);
+        public static readonly ClassInfo Mage = new ClassInfo(50, 15, ClassType.Mage);
+        public static readonly ClassInfo Thief = new ClassInfo(75, 12, ClassType.Thief);
+
+        public static void GetClassInfo(ClassType type, out ClassInfo classInfo)
+        {
+            classInfo = new ClassInfo(0, 0, ClassType.None);
+            switch (type)
+            {
+                case ClassType.Warrior:
+                    classInfo = Warrior;
+                    break;
+                case ClassType.Mage:
+                    classInfo = Mage;
+                    break;
+                case ClassType.Thief:
+                    classInfo = Thief;
+                    break;
+            }
+        }
+
+        public int hp;
+        public int atk;
+        public ClassType type;
+
+        public ClassInfo(int hp, int atk, ClassType type)
+        {
+            this.hp = hp;
+            this.atk = atk;
+            this.type = type;
+        }
+    }
+
+
+    class Program
+    {
+        public static ClassType SelectClass()
+        {
+            Console.WriteLine("직업을 선택하세요!");
+            Console.WriteLine("[1] 전사\n[2] 마법사\n[3] 도둑");
+            var input = Console.ReadLine();
+            if (int.TryParse(input, out int choice))
+            {
+                switch(choice)
+                {
+                    case 1:
+                        return ClassType.Warrior;
+                    case 2:
+                        return ClassType.Mage;
+                    case 3:
+                        return ClassType.Thief;
+                }
+            }
+            return ClassType.None;
+        }
+
+        static void Main(string[] args)
+        {
+            while(true)
+            {
+                ClassType selectedClass = SelectClass();
+                if (selectedClass is ClassType.Warrior or ClassType.Mage or ClassType.Thief)
+                {
+                    ClassInfo.GetClassInfo(selectedClass, out ClassInfo classInfo);
+                    Console.WriteLine($"HP {classInfo.hp}, ATK {classInfo.atk}");
+                }
+            }
+        }
+    }
+}
+
+(2)
+
+namespace TextRPG
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int choice = 0;
+
+            while (true)
+            {
+                Console.WriteLine("직업을 선택하세요!");
+                Console.WriteLine("[1] 전사");
+                Console.WriteLine("[2] 마법사");
+                Console.WriteLine("[3]도둑");
+
+                string? input = Console.ReadLine();
+
+                if (int.TryParse(input, out choice))
+                {
+                    if (choice == 1 || choice == 2 || choice == 3)
+                    {
+                        break;
+                    }
+
+                }
+                Console.WriteLine("잘못된 입력입니다. 다시 입력해주세요.");
+
+
+
+        }
+            string jobname = "";
+            switch (choice)
+            {
+                case 1:
+                    jobname = "전사";
+                    break;
+
+                case 2:
+                    jobname = "마법사";
+                    break;
+
+                case 3:
+                    jobname = "도둑";
+                    break;
+
+            }
+            Console.WriteLine($"\n당신은 {jobname}를 선택했습니다.");
+        }
+    }
+}
+
+(3)
+
+namespace _20250730_practice
+{
+    internal class Program
+    {
+        enum ClassType
+        {
+            None,
+            Knight,
+            Mage,
+            Rogue
+        }
+
+        static void Warrior(out int hp, out int atk)
+        {
+            hp = 100;
+            atk = 10;
+            Console.WriteLine($"HP: {hp}, ATK: {atk}");
+        }
+        static void Wizard(out int hp, out int atk)
+        {
+            hp = 50;
+            atk = 15;
+            Console.WriteLine($"HP: {hp}, ATK: {atk}");
+        }
+        static void Thief(out int hp, out int atk)
+        {
+            hp = 75;
+            atk = 12;
+            Console.WriteLine($"HP: {hp}, ATK: {atk}");
+        }
+
+
+        static ClassType Choose(ref int hp, ref int atk)
+        {
+            bool playercheck = true;
+            string s = "";
+            ClassType choice = ClassType.None;
+
+            while (/*Choose*/ true)
+            {
+                Console.WriteLine("직업을 선택하세요!");
+                Console.WriteLine("[1] 전사");
+                Console.WriteLine("[2] 마법사");
+                Console.WriteLine("[3] 도둑");
+                s = Console.ReadLine();
+                switch (s)
+                {
+                    case "1":
+                        choice = ClassType.Knight;
+                        Warrior(out hp, out atk);
+                        playercheck = false;
+                        break;
+                    case "2":
+                        choice = ClassType.Mage;
+                        Wizard(out hp, out atk);
+                        playercheck = false;
+                        break;
+                    case "3":
+                        choice = ClassType.Rogue;
+                        Thief(out hp, out atk);
+                        playercheck = false;
+                        break;
+                    default:
+                        Console.WriteLine("올바른 입력이 아닙니다.");
+                        break;
+                }
+
+            }
+
+            return choice;
+        }
+
+        static void Main(string[] args)
+        {
+            int hp = 0;
+            int atk = 0;
+
+            //string player = playercheck();
+            ClassType choice = ClassType.None;
+            choice = Choose(ref hp, ref atk);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
