@@ -1,5 +1,14 @@
 # 유니티 스크립트 예제
-Unity BootCamp
+> ## 목차
+> 1. 유니티 생명 주기
+>
+> 2. 이벤트 함수 예시
+>
+> 3. 태그
+>
+> 4. 캐싱
+>
+> 5. 벡터
 
 ## 유니티의 생명주기
 ***
@@ -40,6 +49,51 @@ Unity BootCamp
 
 4. c#의 가상 함수 개념(update를 대신해 특정 클래스에서 업데이트 로직을 처리함)<br/> 특정 하나의 관리 클래스 (manager)에 update의 로직을 위임해 관리해 사용
 
-   
+## 태그
+> ### 1. Gameobject.FindwithTag("태그이름")
+>
+> 씬에서 해당 태그를 가지고 있는 오브젝트를 검색하는 기능
+>
+> 이 기능을 통해 받아 오는 값은 게임 오브젝트이다.
+>
+> ### 2. GameObject.GetComponent<T>.
+>
+> 게임 오브젝트는 GetComponent<T>를 통해 T에 컴포넌트의 유형을 작성해 주면 T가 가진 값을 가져온다.
+>
+## 오브젝트 캐싱 (objext Cashing)
+> ### 1. 개념
+>
+> 자주 사용되는 데이터나 값을 미리 복사해두는 임시 장소
+>
+> ### 2. 사용 의도
+>
+> 1) 시간 지역성 : 가장 최근에 사용된 값이 다시 사용될 가능성이 높다.
+>
+> 2) 공간 지역성 : 최근에 접근한 주소와 인접한 주소의 변수가 사용될 가능성이 높다.
+>
+> ### 3. 예시:
+>
+>  ...클래스 생략 Rigidbody rb; <br/> Vector3 pos;(명명)   <br/> void start() { rb = GetComponent<Rigidbody>();}
+>
+>  void Update() { GetComponent<Rigidbody>().AddForce(pos * 5);
+>
+## 벡터
+
+>### 벡터의 요소 n 벡터의 특징 n 벡터의 예시
+>
+> |제목|내용|
+>|-----|------|
+>|벡터의 요소| x == x축의 값 <br/> y == y축의 값 <br/> z == z축의 값 w == 쉐이더|
+>|벡터의 특징| 1. 값 타입. <br/> 2. 값을 복사할 경우 값 그 자체를 복사하기만 한다. <br/> 3. 벡터에 대한 계산 보조 기능 (magnitude, normalized, dot, cross...) <br/> 4. 벡터 저장 영역은 스택 영역 메모리.|
+>|벡터의 예시| public Vector 3 A = new Vector3() <br/> public Vector3 c = new Vector3(5,6,7) <br/> 또는 벡터를 선언하고, 새 함수에 "벡터" = A + C|
+
+게임 오브젝트의 Transform을 통해 벡터 값을 구할 수 있다. 벡터는 필드에 안 쓴다.
+
+ ## 부록 . 보간
+ > ### 보간이란
+>
+> 해당 방향으로 일정 간격 천천히 이동함.
+>
+> public Transform target; <br/> public float speed = 1.of; private Vector3 start_position; <br/> private float t = 0.0f;<br/> private void Start() { start_position = transform.position;} <br/>private void Update(){if (t < 1.0f) { <br/> t += Time.deltaTime * speed; transform.position = Vector3.Slerp (start+position, tarfet.position, t);}}}
 
    
