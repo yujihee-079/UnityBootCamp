@@ -1,0 +1,234 @@
+8일차 ## unity
+
+AddComponentMen의 순서를 바꾸려면, 영문자 앞에 숫자를 추가함.
+오더라는 기능을 굳이 쓰지 않는다.
+
+[ContextMenuItem("MeeageRest", "MessageRest")]는 필드에서만 쓸 수 있다.
+밑에 아무것도 없어선 안되며, {}가 붙어도 안된다.
+
+static 의 특징 -- >  데이터를 바로 호출 가능
+퍼블릭 같은 경우 코드가 공개되어 있지만 퍼져 있지 않다.
+그래서 new 명령어로 가져온다.
+
+[multiline]
+//문자열이 장문일 경우 유용한 속성
+//기본은 1줄, 설정을 넣으면 그 수치만큼 칸이 늘어납니다.
+//스크롤은 안된다.
+
+플레이어를 직접 삭제하는 것은 비권장. 클래스에서 사용할 때
+껏다 키는 용도 ( 체력이 다 떨어지면 , 캐릭터가 쓰러짐)가 낫다.
+
+struct는 잘 쓰지 않는다. 불러오는데 실수가 발생 가능성 있다.
+
+호출과 값복사는 다르다.
+
+public class PlayerStat 선언하면 ( 덩어리 )
+
+추가로 PlayerStat 바구니를 담을 객체가 필요하다
+== > public playerStat stat;
+
+유니티의 입력 시스템
+
+(1. Input Mavager) - 함수 기반 처리 -> 폴링 기반 처리 (함수)
+Edit -> projext Settings -> Input
+
+
+(2 Input System) - 이벤트 처리.
+
+
+Create -> Input Action 생성
+
+TestActions로 이름 변경
+기능 : input에 대한 관리자(Manager) 같은 느낌
+
+코드 없이 시각적으로 입력을 구성할 수 있는 에디터
+
+Scheme : 구역 설정(pc / Mobile)
+Add control Scheme 
+이름과 장치 유형을 선택
+추가 이후에는 에디트, 듀플리케이트 딜리트등을 진행
+
+Action Maps :액션 그룹
+
+Action : 실제로 실행할 행동에 대한 정의를 진행하는 곳
+ -> Binding(바인딩) : 각 액션에 대한 키 바인딩
+
+Action Properties : 액션에 대한 속성들
+
+-Action Type : 액션 유형을 선택
+-Button : 눌렀는지, 뗏는지 등의 여부만 감지하는 
+             단순 버튼 입력(키 입력, 마우스 입력)
+-value : 연속적인 값 (Vector 값 float 값..)를 읽는 입력
+           (주로 이동 기능 구현, 조이스틱 조작)
+-pass Through : 그대로 전달 , 여러 입력 장치의 동시 감지 등을
+                     사용하는 경우
+
+-Interactions : 입력 방식에 대한 설정 ( 상호작용 )
+                   홀드 , 탭 , 프레스
+
+-processors : 입력 값에 대한 가공 ( 반전, 스케일 조정,
+                                             데드 존 설정)
+
+* 데드 존 : 조이스틱, 게임패드 등에서 발생하는 미세한 움직임
+              등을 무시하는 작업
+
+Binding Properies
+"move" --> Add positive\Nagativer Binding
+-composite --> composite Type : 3D Vector
+괄호 열고 up , down, left, right 키를 각각 입력
+
+모드 : 아날로그 (스틱 / 게임 패드)
+        디지털 (키보드 키/ 버튼)
+
+Action을 사용할 오브젝트에 
+player Input 컴포넌트 추가 
+
+player Input
+: 유니티 인풋 시스템에서 사용하ㅏ는 컴포넌트
+
+2.InputActions 를 등록해 자동으로 매핑
+
+3. 이벤트 기반으로 할지, 메시지 기반으로 할지, 수동으로
+호출할지 설정이 가능. 여러 player Input도 지원( 멀티 플레이)
+
+스크립트 작성
+
+InputSystemSample.cs
+
+## 리지드바디는 넣지 않는다. 땅이 없을 때
+
+스크립트 예시
+
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+[RequireComponent(typeof(PlayerInput))]
+public class InputSystemExample : MonoBehaviour
+
+
+
+{
+      private Vector2 moveInputValue;
+    private float speed = 3.0f;
+    void OnMove(InputValue value)
+    {
+        moveInputValue = value.Get<Vector2>();
+    }
+
+  
+    void Update()
+    {
+        Vector3 move = new Vector3(moveInputValue.x,0,moveInputValue.y); // 좌우 x축 상하 z축
+         transform.Translate(move *  speed *Time.deltaTime);
+    }
+}
+
+## 월드 좌표계 ==> 벡터
+UI , 해상도 고정 때 사용.
+
+
+@@ 도전 과제
+
+입력 시스템(Legacy)를 이용해서
+특정 키를 눌렀을 경우 화면에 있는 아이템을 강화하는 프로그램
+
+==> 아이템의 정보
+아이템의 이름 -> 이름 
+강화 수치 -> 1~10
+공격력 -> 1강 당 5씩 증가
+성공 확률 -> 1강 당 10% 감소
+
+
+
+마우스 왼쪽을 누르면 강화, 
+
+강화 수치는 Random.Range코드.
+
+공격력 증가는 증감 연산자를 쓰기.
+
+공격력 ATK
+
+1강 당 이란 조건이 붙으니까 for 또는 swich 문을 쓰면 될듯
+
+if문
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
