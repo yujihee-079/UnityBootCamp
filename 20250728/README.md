@@ -9,6 +9,16 @@
 > 4. 캐싱
 >
 > 5. 벡터
+>
+> 6. Attritbute
+>
+> 7. Input
+>
+> 8. 수학 Mathf
+>
+> 9. 회전, 타깃을 향해 회전등의 움직임
+>    
+> 10. 레이케스트
 
 ## 유니티의 생명주기
 ***
@@ -95,5 +105,15 @@
 > 해당 방향으로 일정 간격 천천히 이동함.
 >
 > public Transform target; <br/> public float speed = 1.of; private Vector3 start_position; <br/> private float t = 0.0f;<br/> private void Start() { start_position = transform.position;} <br/>private void Update(){if (t < 1.0f) { <br/> t += Time.deltaTime * speed; transform.position = Vector3.Slerp (start+position, tarfet.position, t);}}}
+>
+> ### 두 예시
+>LinerInter | sphericaInter
+>
+> 선형 보간 방식인 리니어인터는 시간에 따라 직선으로 천천히 이동한다. 예를 들어 업데이트에 코드가 작성됐을 때 너무 빠르게 움직일 때 적용해 볼 수 있다.
+> private void Update() <br/> { <br/> if ( t < 1.0f) 설명 : 조건문 조건이고 t는 앞에서 설정한 float t이다. <br/> { t += time.deltaTime * speed; 설명 : 시간 조건이 게임이 시작하고 천천히 증가하는 수치 만큼 스피드 수치를 곱하라는 뜻이다 <br/> transform.position = Vector3.Lerp ( start_position, target.position, t); 설명 이동하는 상태 조건이다. Lerp가 선형 보간 방식이고위 방식에는 ()안에 3가지 요소를 적어야 한다. 처음 시작한 장소, 목표로 하는 장소, 시간. <br/> }}}
+>
+>구면 선형 보간 방식인 슬러프는 시간에 따라 포물선을 그리며 이동한다. 위와 동일한데, Vector3.Slerp 로 바꿔쓰면 된다.
+>
+## Attribute
 
    
