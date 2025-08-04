@@ -1,0 +1,20 @@
+8 / 4 오브젝트 생성
+1. Prefabs 폴더 생성
+--> Cube Object
+
+2. Scripts 폴더 생성
+-->PrefabSpawner.cs 생성
+
+3. Sample.cs 생성
+
+4. SampleSpawner.cs 생성
+
+
+2교시 코루틴 
+1.IEnumeratorSample.cs 생성
+
+2.빈 오브젝트에 연결해서 사용
+
+C# 기준으로 IEnumerator 사용 가능
+유니티(Monobehaviour) 환경에서
+IEnumerator는 코루틴으로써 사용 가능
