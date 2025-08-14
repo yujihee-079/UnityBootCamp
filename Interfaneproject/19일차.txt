@@ -63,6 +63,42 @@ ex) 공격이 맞으면, 일시적으로 빨간색을 띈다.
      유무를 체크한다.
 
 버튼을 눌렀을 때, 공격이 처리되도록 합니다.(공격 형태는 알아서 변경한다.)
+
+3교시 : Button to Action
+스크립터블 오브젝트를 완성하세요.(근접, 원거리 , 캐스팅)
+
+각각의 기능을 구현합니다.
+ex) 공격이 맞으면, 일시적으로 빨간색을 띈다.
+     거리를 계산해서 공격의 성공과 실패
+     유무를 체크한다.
+
+버튼을 눌렀을 때, 공격이 처리되도록 합니다.(공격 형태는 알아서 변경한다.)
+
+4교시 : 오전 정리 및 실습 마무리
+
+점심 시간
+
+5교시 : 유니티 이벤트 인터페이스
+
+ClickTester.cs 생성
+Circle ClickTester 스크립트  연결
+Circle에 Circle Collider 2D 연결
+
+IPointer 관련
+오브젝트에 인터페이스 구현한 스크립트 컴포넌트로 연결
+오브젝트 사용 시 카메라에 Phsysics 2D Raycaster 연결
+UI일 경우 Graphic Raycaster 확인
+UI 오브젝트에 Graphic Raycaster Target 설정
+- UIEventCycle 클래스 설계로 이벤트 싸이클 시뮬레이터 설계 
+
+6교시 : 유니티 C# event 소개 및 Action 소개
+EventScene 생성
+
+7교시 : Action<T>와 Func<T> 소개
+게임 오브젝트에 Event Example, ActionFuncExample 등록
+
+8교시 : Func<T> 소개 마무리 내용 정리
+
 =============================================
 
 
