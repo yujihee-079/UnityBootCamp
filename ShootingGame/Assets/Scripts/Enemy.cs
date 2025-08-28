@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     public float speed = 5f;//이동 속도
     public EnemyType type = EnemyType.Down; // 기본적으로는 아래로 내려가는 기믹만 설계
 
+    public GameObject explosionFactory; // 폭발 공장
+
     // 적에 대한 패턴
     private void Start()
     {
@@ -66,6 +68,24 @@ public class Enemy : MonoBehaviour
     // Is Trigger 체크가 진행된 오브젝트와의 트리거 충돌 Trigger(충돌 여부만 체크함)
     private void OnCollisionEnter(Collision collision)
     {
+        //클래스명.Instance.메소드명(0)으로 기능만 사용하는 것이 가능해진다.
+        ScoreManager.instance.SetScore(5);
+
+        
+        
+       
+
+        // GameObject explosion = Instantiate(explosionFactory, transform.position, Quaternion.identity); // 현재 적 위치에 생성
+        if (explosionFactory != null)
+        {
+            Instantiate(explosionFactory, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("ExplosionFactory 프리팹이 할당되지 않았습니다."); // null발생 시 보완하려는 if문 조건문
+        }
+
+
         Destroy(collision.gameObject);  // 상대방 파괴
         Destroy(gameObject); // 자신 파괴
     }
