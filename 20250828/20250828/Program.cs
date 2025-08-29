@@ -15,11 +15,24 @@
         static void Main()
         {
             List<Monster> monster = new List<Monster>();
+            monster.Add(new Monster(2));
+            monster.Add(new Monster(1));
+            monster.Add(new Monster(7));
+            monster.Add(new Monster(4));
+            monster.Add(new Monster(23123));
+
+
 
             Dictionary<int, List<Monster>> monsters = new Dictionary<int, List<Monster>>();
             monsters.Add(1, new List<Monster>());
 
-            
+            Dictionary<int, Monster> dic1 = new Dictionary<int, Monster>();
+            dic1.Add(23123, new Monster(23123));
+            dic1.Add(23123, new Monster(23123));
+            dic1.Add(23123, new Monster(23123));
+            dic1.Add(23123, new Monster(23123));
+            dic1.Add(23123, new Monster(23123));
+
 
 
             Dictionary<int, string> dic = new Dictionary<int, string>();
