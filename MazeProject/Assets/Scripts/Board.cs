@@ -15,6 +15,7 @@ public class Board : MonoBehaviour
     public int DestY { get; set; }
     public int DestX { get; set; }
 
+    private Transform _maze;
     private Material emptyMat;
     private Material wallMat;
     private Material goalMat;
@@ -113,6 +114,12 @@ public class Board : MonoBehaviour
 
     public void Spawn()
     {
+        if (_maze != null)
+            Despawn();
+
+        _maze = new GameObject().transform;
+        _maze.parent = transform;
+        _maze.name = " Maze ";
         for (int y = 0; y < Size; y++)
         {
             for (int x = 0; x < Size; x++)
@@ -129,6 +136,12 @@ public class Board : MonoBehaviour
                 go.GetComponent<MeshRenderer>().sharedMaterial = GetTileColor(Tile[y, x]);
             }
         }
+    }
+
+    private void Despawn()
+    {
+        Destroy(_maze.gameObject);
+
     }
 
     private Material GetTileColor(TileType type)
